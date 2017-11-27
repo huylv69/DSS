@@ -353,7 +353,7 @@
 		<div class="col-xs-12">
 			<div class="card">
         <h4>Choose a file csv to upload   </h4>
-        <form enctype="multipart/form-data" method="post" action="/uploadcsv">
+        <form enctype="multipart/form-data" method="post" action="/nv2">
             <input type="file" name="file">
             <input type="submit" name="Submit">
         </form>
@@ -376,30 +376,50 @@
 						<table class="table table-striped table-bordered base-style">
 							<thead>
 								<tr>
-									<th>Country</th>
-									<th>Age</th>
-									<th>Salary</th>
-									<th>Purchase</th>
-
+									<th>ID</th>
+									<th>Name</th>
+									<th>Toan</th>
+                                    <th>Ly</th>
+                                    <th>Hoa</th>
+                                    <th>Van</th>
+                                    <th>Anh</th>
+                                    <th>Sinh</th>
+                                    <th>Su</th>
+                                    <th>Dia</th>
+                                    <th>NV2</th>
                                 </tr>
                             </thead>
                             <tbody>
                                     <% for (var i = 0; i < users.length; i++){ %>
                                         <tr>
-                                                <td><%=users[i].country%></td>
-                                                <td><%=users[i].age%></td>
-                                                <td><%=users[i].salary%></td>
-                                                <td><%=users[i].purchase%></td>
+                                                <td><%=users[i].ID%></td>
+                                                <td><%=users[i].Name%></td>
+                                                <td><%=users[i].Toan%></td>
+                                                <td><%=users[i].Ly%></td>
+                                                <td><%=users[i].Hoa%></td>
+                                                <td><%=users[i].Van%></td>
+                                                <td><%=users[i].Anh%></td>
+                                                <td><%=users[i].Sinh%></td>
+                                                <td><%=users[i].Su%></td>
+                                                <td><%=users[i].Dia%></td>
+                                                <td><%=users[i].NV1%></td>
                                         </tr>
                                     <% }%>
                                 
                             </tbody>
 							<tfoot>
 								<tr>
-                  <th>Country</th>
-									<th>Age</th>
-									<th>Salary</th>
-									<th>Purchase</th>
+                                    <th>ID</th>
+									<th>Name</th>
+									<th>Toan</th>
+                                    <th>Ly</th>
+                                    <th>Hoa</th>
+                                    <th>Van</th>
+                                    <th>Anh</th>
+                                    <th>Sinh</th>
+                                    <th>Su</th>
+                                    <th>Dia</th>
+                                    <th>NV2</th>
 								</tr>
 							</tfoot>				
 						</table>				
