@@ -317,27 +317,27 @@
                   <i data-toggle="tooltip" data-placement="right" data-original-title="Apps" class=" ft-minus"></i>
               </li> -->
               <li class=" nav-item">
-                  <a href="/admin/user">
+                  <a href="/nv1">
                       <i class="ft-user"></i>
-                      <span data-i18n="" class="menu-title">Users</span>
+                      <span data-i18n="" class="menu-title">Nguyện vọng 1</span>
                   </a>
               </li>
               <li class=" nav-item">
-                  <a href="/admin/rest">
+                  <a href="/nv2">
                       <i class="ft-message-square"></i>
-                      <span data-i18n="" class="menu-title">Rests</span>
+                      <span data-i18n="" class="menu-title">Nguyện vọng 2</span>
                   </a>
               </li>
               <li class=" nav-item">
-                  <a href="/admin/dish">
+                  <a href="/nganh">
                       <i class="ft-airplay"></i>
-                      <span data-i18n="" class="menu-title">Dishes</span>
+                      <span data-i18n="" class="menu-title">Ngành</span>
                   </a>
               </li>
               <li class=" nav-item">
-                  <a href="/admin/contact">
+                  <a href="/chitieu">
                       <i class="ft-printer"></i>
-                      <span data-i18n="" class="menu-title">Contacts</span>
+                      <span data-i18n="" class="menu-title">Chỉ tiêu</span>
                   </a>
               </li>
           </ul>
@@ -354,11 +354,29 @@
 			<div class="card">
         <h4>Choose a file csv to upload   </h4>
         <form enctype="multipart/form-data" method="post" action="/uploadcsv">
-            <input type="file" name="file">
+            <h4>Nhập bảng ngành (Mã ngành, tên ngành, chỉ tiêu, điểm sàn của bộ giáo dục) </h4>
+            <input type="file" name="bangnganh"  onchange="javascript:this.form.submit();"><br><hr>
+            <!-- <h4>Nhập bảng phổ điểm của năm nay</h4>
+            <input type="file" name="bangphodiem"><br><hr> -->
+        </form>
+        <form enctype="multipart/form-data" method="post" action="/bangdiem1">
+            <h4>Nhập bảng điểm học sinh</h4>
+            <input type="file" name="bangdiem1" onchange="javascript:this.form.submit();"> <br><hr>
+        </form>
+        <form enctype="multipart/form-data" method="post" action="/bangdihoc">
+            <h4>Nhập bảng tỷ lệ đi học thực hàng năm theo thang điểm</h4>
+            <input type="file" name="bangdihoc" onchange="javascript:this.form.submit();"><br><hr>
+            
+        </form>
+
+        <form enctype="multipart/form-data" method="post" action="/submit">
+            <h4>Nhập tỷ lệ vượt chỉ tiêu tối đa cho phép </h4>
+            <input type="number" name="vuotchitieu">
             <input type="submit" name="Submit">
         </form>
-				<div class="card-header">
-					<h4 class="card-title">Base style</h4>
+
+		<!-- <div class="card-header">
+			<h4 class="card-title">Base style</h4>
           <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
           
 					<div class="heading-elements">
@@ -406,7 +424,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </section>
 
