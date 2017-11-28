@@ -4,6 +4,6 @@ var connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '',
-  database: "DSS",
+  database: "dss",
 });
 module.exports.connection = connection;
