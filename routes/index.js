@@ -55,10 +55,9 @@ router.post('/uploadcsv', function (req, res) {
     var stream = fs.createReadStream(datafile)
       .pipe(csv.parse({ headers: true }))
       .transform(function (row) {
-        var sql = 'INSERT INTO bangnganh (ID, Ten, Chitieu, DiemSan) VALUES (' + "'" + row.ID + "'" +
+        var sql = 'INSERT INTO bangnganh (ma_nganh, ten, chi_tieu) VALUES (' + "'" + row.ID + "'" +
           ',' + "'" + row.Ten + "'" +
-          ',' + "'" + row.ChiTieu + "'" +
-          ',' + "'" + row.DiemSan + "'" + ')';
+          ',' + "'" + row.ChiTieu + "'" + ')';
         connection.query(sql, function (err, result) {
           if (err)
             throw err;
@@ -124,13 +123,14 @@ router.post('/bangdiem1', function (req, res) {
     var stream = fs.createReadStream(datafile, { encoding: 'utf-8' })
       .pipe(csv.parse({ headers: true }))
       .transform(function (row) {
-        var sql = 'INSERT INTO bangdiem1 (ID, Ten, Mon1, Mon2, Mon3, TongDiem, NV1 ) VALUES (' + "'" + row.ID + "'" +
+        var sql = 'INSERT INTO bangdiem (ID, Ten, Mon1, Mon2, Mon3, TongDiem, NV1 ,NV2) VALUES (' + 
+                "'" + row.ID + "'" +
           ',' + "'" + row.Ten + "'" +
           ',' + "'" + row.Mon1 + "'" +
           ',' + "'" + row.Mon2 + "'" +
           ',' + "'" + row.Mon3 + "'" +
           ',' + "'" + row.TongDiem + "'" +
-          ',' + "'" + row.NV1 + "'" + ')';
+          ',' + "'" + row.NV1 + "'" +','+10 +')';
         connection.query(sql, function (err, result) {
           if (err)
             throw err;
@@ -170,7 +170,9 @@ router.post('/nv1', function (req, res) {
     var fs = require("fs");
     var stream = fs.createReadStream(datafile, { encoding: "utf-8" })
       .pipe(csv.parse({ headers: true }))
+
       .transform(function (row) {
+
         var sql = 'INSERT INTO nv1 (ID, Name ,Toan , Ly, Hoa, Van, Anh, Sinh, Su, Dia, NV1) VALUES ('
           + "'" + row.ID + "'" + ','
           + "'" + row.Name + "'" + ','
@@ -227,7 +229,7 @@ router.post('/nv2', function (req, res) {
   res.redirect('/nv2');
 });
 
-router.get('/results',function(req , res){
+router.get('/results', function (req, res) {
 
 })
 module.exports = router;
