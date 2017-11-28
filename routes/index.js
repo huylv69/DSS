@@ -19,43 +19,55 @@ var uploadBangDiem1 = multer({ storage: storage }).array('bangdiem1', 1);
 var uploadBangDiem2 = multer({ storage: storage }).array('bangdiem2', 1);
 var uploadBangPhoDiem = multer({ storage: storage }).array('bangphodiem', 1);
 var uploadBangDiHoc = multer({ storage: storage }).array('bangdihoc', 1);
+var uploadTest = multer({ storage: storage }).fields([
+  { name: 'bangdiem1', maxCount: 1 },
+  { name: 'bangnganh', maxCount: 1 },
+  { name: 'bangdihoc', maxCount: 1 }]);
 
 
 //Trang chu
 router.get('/', function (req, res) {
-  connection.query("SELECT * FROM data", function (err, result) {
-    if (err) throw err;
-    res.render('index', { users: result });
-  });
+  res.render('index2', {msg: ""});
 });
-
-//Trang NV1
-router.get('/nv1', function (req, res) {
-  connection.query("SELECT * FROM nv1", function (err, result) {
-    if (err) throw err;
-    res.render('nv1', { users: result });
-  });
-});
-
-//Trang NV2
-router.get('/nv2', function (req, res) {
-  connection.query("SELECT * FROM nv2", function (err, result) {
-    if (err) throw err;
-    res.render('nv2', { users: result });
-  });
-});
-
 
 router.post('/uploadcsv', function (req, res) {
 
-  uploadBangNganh(req, res, function (err) {
+  uploadTest(req, res, function (err) {
+    
+    var bangnganh = req.files.bangnganh[0].path;
+    var bangdihoc = req.files.bangdihoc[0].path;
+    var bangdiem1 = req.files.bangdiem1[0].path;
+
+    var delbangnganh = 'DELETE FROM bangnganh';
+    var delbangdihoc = 'DELETE FROM bangdihoc';
+    var delbangdiem1 = 'DELETE FROM bangdiem1';
+    connection.query(delbangnganh, function (err, result) {
+      if (err)
+        throw err;
+    });
+
+    connection.query(delbangdihoc, function (err, result) {
+      if (err)
+        throw err;
+    });
+
+    connection.query(delbangdiem1, function (err, result) {
+      if (err)
+        throw err;
+    });
+
     var csv = require("fast-csv");
     var fs = require("fs");
-    var datafile = req.files[0].path;
-    var stream = fs.createReadStream(datafile)
+    var stream = fs.createReadStream(bangnganh)
       .pipe(csv.parse({ headers: true }))
       .transform(function (row) {
+<<<<<<< HEAD
         var sql = 'INSERT INTO bangnganh (ma_nganh, ten, chi_tieu) VALUES (' + "'" + row.ID + "'" +
+=======
+
+        var sql = 'INSERT INTO bangnganh (ID, Ten, Chitieu, DiemSan) VALUES (' +
+          "'" + row.ID + "'" +
+>>>>>>> 2ee11a57164c75be212473d4d4693790306358da
           ',' + "'" + row.Ten + "'" +
           ',' + "'" + row.ChiTieu + "'" + ')';
         connection.query(sql, function (err, result) {
@@ -64,89 +76,37 @@ router.post('/uploadcsv', function (req, res) {
         });
       })
       .on("end", process.exit);
-  });
 
 
-
-  // uploadBangDiem2(req,res,function(err) {
-  //   var datafile = req.files[0].filename;
-  //   var stream = fs.createReadStream( datafile)
-  //   .pipe(csv.parse({headers: true}))
-  //   .transform(function (row) {
-  //       var sql = 'INSERT INTO bangdiem2 (ID, Ten, Mon1, Mon2, Mon3, TongDiem, NV2 ) VALUES (' + "'" + row.ID + "'" + 
-  //       ','  + "'" +   row.Ten  + "'" +
-  //        ',' +  "'" +  row.Mon1   + "'" +
-  //        ',' +  "'" +  row.Mon2   + "'" + 
-  //        ',' +  "'" +  row.Mon3   + "'" + 
-  //        ',' +  "'" +  row.TongDiem   + "'" + 
-  //        ',' +  "'" +  row.NV2  +  "'" + ')';
-  //       connection.query(sql, function (err, result) {
-  //         if (err) 
-  //           throw err;
-  //       });
-  //   })
-  //   .on("end", process.exit);
-  //   });
-
-  // uploadBangPhoDiem(req,res,function(err) {
-  //   var datafile = req.files[0].filename;
-  //   var stream = fs.createReadStream( datafile)
-  //   .pipe(csv.parse({headers: true}))
-  //   .transform(function (row) {
-  //       var sql = 'INSERT INTO bangphodiem (d1, d2, d3, d4, d5, d6, d7, d8, d9, d10 ) VALUES (' + "'" + row.d1 + "'" + 
-  //       ','  + "'" +   row.d2  + "'" +
-  //        ',' +  "'" +  row.d3   + "'" +
-  //        ',' +  "'" +  row.d4   + "'" + 
-  //        ',' +  "'" +  row.d5   + "'" + 
-  //        ',' +  "'" +  row.d6   + "'" + 
-  //        ',' +  "'" +  row.d7   + "'" + 
-  //        ',' +  "'" +  row.d8   + "'" + 
-  //        ',' +  "'" +  row.d9   + "'" + 
-  //        ',' +  "'" +  row.d10  +  "'" + ')';
-  //       connection.query(sql, function (err, result) {
-  //         if (err) 
-  //           throw err;
-  //       });
-  //   })
-  //   .on("end", process.exit);
-  //   });
-
-  res.redirect('/');
-});
-
-
-router.post('/bangdiem1', function (req, res) {
-  uploadBangDiem1(req, res, function (err) {
-    var csv = require("fast-csv");
-    var fs = require("fs");
-    var datafile = req.files[0].path;
-    var stream = fs.createReadStream(datafile, { encoding: 'utf-8' })
+    var stream2 = fs.createReadStream(bangdiem1, { encoding: 'utf-8' })
       .pipe(csv.parse({ headers: true }))
       .transform(function (row) {
+<<<<<<< HEAD
         var sql = 'INSERT INTO bangdiem (ID, Ten, Mon1, Mon2, Mon3, TongDiem, NV1 ,NV2) VALUES (' + 
                 "'" + row.ID + "'" +
+=======
+        var sql = 'INSERT INTO bangdiem1 (ID, Ten, Mon1, Mon2, Mon3, TongDiem, NV1, NV2 ) VALUES (' +
+          "'" + row.ID + "'" +
+>>>>>>> 2ee11a57164c75be212473d4d4693790306358da
           ',' + "'" + row.Ten + "'" +
           ',' + "'" + row.Mon1 + "'" +
           ',' + "'" + row.Mon2 + "'" +
           ',' + "'" + row.Mon3 + "'" +
           ',' + "'" + row.TongDiem + "'" +
+<<<<<<< HEAD
           ',' + "'" + row.NV1 + "'" +','+10 +')';
+=======
+          ',' + "'" + row.NV1 + "'" +
+          ',' + "'" + row.NV2 + "'" + ')';
+>>>>>>> 2ee11a57164c75be212473d4d4693790306358da
         connection.query(sql, function (err, result) {
           if (err)
             throw err;
         });
       })
       .on("end", process.exit);
-  });
-  res.redirect('/');
-})
 
-router.post('/bangdihoc', function (req, res) {
-  uploadBangDiHoc(req, res, function (err) {
-    var csv = require("fast-csv");
-    var fs = require("fs");
-    var datafile = req.files[0].path;
-    var stream = fs.createReadStream(datafile)
+    var stream3 = fs.createReadStream(bangdihoc)
       .pipe(csv.parse({ headers: true }))
       .transform(function (row) {
         var sql = 'INSERT INTO bangdihoc (Diem, TyLe ) VALUES (' + "'" + row.Diem + "'" +
@@ -157,6 +117,7 @@ router.post('/bangdihoc', function (req, res) {
         });
       })
       .on("end", process.exit);
+<<<<<<< HEAD
   });
   res.redirect('/');
 })
@@ -195,38 +156,11 @@ router.post('/nv1', function (req, res) {
   });
   res.redirect('/nv1');
 });
+=======
+  })
+>>>>>>> 2ee11a57164c75be212473d4d4693790306358da
 
-//Upload Thi Sinh NV2
-router.post('/nv2', function (req, res) {
-  upload(req, res, function (err) {
-    console.log(req.files);
-    var datafile = req.files[0].path;
-    var csv = require("fast-csv");
-    var fs = require("fs");
-    var stream = fs.createReadStream(datafile, { encoding: "utf-8" })
-      .pipe(csv.parse({ headers: true }))
-      .transform(function (row) {
-
-        var sql = 'INSERT INTO nv2 (ID, Name ,Toan , Ly, Hoa, Van, Anh, Sinh, Su, Dia, NV2) VALUES ('
-          + "'" + row.ID + "'" + ','
-          + "'" + row.Name + "'" + ','
-          + "'" + row.Toan + "'" + ','
-          + "'" + row.Ly + "'" + ','
-          + "'" + row.Hoa + "'" + ','
-          + "'" + row.Van + "'" + ','
-          + "'" + row.Anh + "'" + ','
-          + "'" + row.Sinh + "'" + ','
-          + "'" + row.Su + "'" + ','
-          + "'" + row.Dia + "'" + ','
-          + "'" + row.NV2 + "'" + ')';
-        connection.query(sql, function (err, result) {
-          if (err)
-            throw err;
-        });
-      })
-      .on("end", process.exit);
-  });
-  res.redirect('/nv2');
+  res.render('index', {msg: "Tải dữ liệu thành công, chọn Tiếp tục để xem kết quả hoặc thay đổi file khác ở bên dưới."});
 });
 
 router.get('/results', function (req, res) {
