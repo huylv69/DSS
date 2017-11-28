@@ -27,7 +27,7 @@ var uploadTest = multer({ storage: storage }).fields([
 
 //Trang chu
 router.get('/', function (req, res) {
-  res.render('index', {msg: ""});
+  res.render('index2', {msg: ""});
 });
 
 router.post('/uploadcsv', function (req, res) {
@@ -107,7 +107,7 @@ router.post('/uploadcsv', function (req, res) {
       .on("end", process.exit);
   })
 
-  res.render('index', {msg: "Upload successfully!"});
+  res.render('index', {msg: "Tải dữ liệu thành công, chọn Tiếp tục để xem kết quả hoặc thay đổi file khác ở bên dưới."});
 });
 
 router.get('/results', function (req, res) {
