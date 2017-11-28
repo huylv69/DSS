@@ -211,19 +211,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Công nghệ thông tin</td>
-                                        <td>29</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Công nghệ thông tin</td>
-                                        <td>29</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Công nghệ thông tin</td>
-                                        <td>29</td>
-                                    </tr>
-
+                                    <% for (var i = 0; i < result.length; i++) { %>
+                                        <tr>
+                                                <td><%=result[i].ten %></td>
+                                                <td><%=result[i].diemchuan %></td>
+                                        </tr>
+                                    <% }%>
                                 </tbody>
                             </table>
                             <br>
@@ -237,113 +230,26 @@
                                         <th>Tên</th>
                                         <th>Tổng điểm</th>
                                         <th>Ngành</th>
-                                        <th>NV</th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>A</td>
-                                        <td>B</td>
-                                        <td>C</td>
-                                        <td>D</td>
-                                        <td>Delete</td>
-                                    </tr>
-                                    <tr>
-                                        <td>A</td>
-                                        <td>N</td>
-                                        <td>C</td>
-                                        <td>M</td>
-                                        <td>Zelete</td>
-                                    </tr>
-                                    <tr>
-                                        <td>A</td>
-                                        <td>B</td>
-                                        <td>C</td>
-                                        <td>D</td>
-                                        <td>Delete</td>
-                                    </tr>
-                                    <tr>
-                                        <td>B</td>
-                                        <td>CD</td>
-                                        <td>F</td>
-                                        <td>G</td>
-                                        <td>Dlete</td>
-                                    </tr>
-                                    <tr>
-                                        <td>A</td>
-                                        <td>N</td>
-                                        <td>C</td>
-                                        <td>M</td>
-                                        <td>Zelete</td>
-                                    </tr>
-                                    <tr>
-                                        <td>A</td>
-                                        <td>B</td>
-                                        <td>C</td>
-                                        <td>D</td>
-                                        <td>Delete</td>
-                                    </tr>
-                                    <tr>
-                                        <td>B</td>
-                                        <td>CD</td>
-                                        <td>F</td>
-                                        <td>G</td>
-                                        <td>Dlete</td>
-                                    </tr>
-                                    <tr>
-                                        <td>A</td>
-                                        <td>N</td>
-                                        <td>C</td>
-                                        <td>M</td>
-                                        <td>Zelete</td>
-                                    </tr>
-                                    <tr>
-                                        <td>A</td>
-                                        <td>B</td>
-                                        <td>C</td>
-                                        <td>D</td>
-                                        <td>Delete</td>
-                                    </tr>
-                                    <tr>
-                                        <td>B</td>
-                                        <td>CD</td>
-                                        <td>F</td>
-                                        <td>G</td>
-                                        <td>Dlete</td>
-                                    </tr>
-                                    <tr>
-                                        <td>A</td>
-                                        <td>N</td>
-                                        <td>C</td>
-                                        <td>M</td>
-                                        <td>Zelete</td>
-                                    </tr>
-                                    <tr>
-                                        <td>A</td>
-                                        <td>B</td>
-                                        <td>C</td>
-                                        <td>D</td>
-                                        <td>Delete</td>
-                                    </tr>
-                                    <tr>
-                                        <td>B</td>
-                                        <td>CD</td>
-                                        <td>F</td>
-                                        <td>G</td>
-                                        <td>Dlete</td>
-                                    </tr>
-
-
+                                        <% for (var i = 0; i < pass.length; i++) { %>
+                                            <tr>
+                                                    <td><%=pass[i].ID %></td>
+                                                    <td><%=pass[i].Ten %></td>
+                                                    <td><%=pass[i].TongDiem %></td>
+                                                    <td><%=pass[i].Pass %></td>
+                                            </tr>
+                                        <% }%>
+                                        
                                 </tbody>
-
                                 <tfoot>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Firstname</th>
-                                        <th>Lastname</th>
-                                        <th>Email</th>
-                                        <th>Action</th>
+                                            <th>ID</th>
+                                            <th>Tên</th>
+                                            <th>Tổng điểm</th>
+                                            <th>Ngành</th>
                                     </tr>
                                 </tfoot>
                             </table>
