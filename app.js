@@ -18,9 +18,9 @@ app.set('view engine', 'ejs');
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
   host     : 'localhost',
-  user     : '',
+  user     : 'root',
   password : '',
-  database: "test",
+  database: "dss",
 });
 
 connection.connect(function(err) {
@@ -30,8 +30,6 @@ connection.connect(function(err) {
   }
     console.log('connected as id ' + connection.threadId);
 });
-
-
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
