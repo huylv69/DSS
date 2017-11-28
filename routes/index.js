@@ -27,7 +27,7 @@ var uploadTest = multer({ storage: storage }).fields([
 
 //Trang chu
 router.get('/', function (req, res) {
-  res.render('index2', {msg: ""});
+  res.render('index', {msg: ""});
 });
 
 router.post('/uploadcsv', function (req, res) {
@@ -39,8 +39,8 @@ router.post('/uploadcsv', function (req, res) {
     var bangdiem1 = req.files.bangdiem1[0].path;
 
     var delbangnganh = 'DELETE FROM bangnganh';
-    var delbangdihoc = 'DELETE FROM bangdihoc';
-    var delbangdiem1 = 'DELETE FROM bangdiem1';
+    var delbangdihoc = 'DELETE FROM dihoc';
+    var delbangdiem1 = 'DELETE FROM bangdiem';
     connection.query(delbangnganh, function (err, result) {
       if (err)
         throw err;
@@ -62,11 +62,10 @@ router.post('/uploadcsv', function (req, res) {
       .pipe(csv.parse({ headers: true }))
       .transform(function (row) {
 
-        var sql = 'INSERT INTO bangnganh (ID, Ten, Chitieu, DiemSan) VALUES (' +
+        var sql = 'INSERT INTO bangnganh (ma_nganh, ten, chi_tieu) VALUES (' +
           "'" + row.ID + "'" +
           ',' + "'" + row.Ten + "'" +
-          ',' + "'" + row.ChiTieu + "'" +
-          ',' + "'" + row.DiemSan + "'" + ')';
+          ',' + "'" + row.ChiTieu + "'" + ')';
         connection.query(sql, function (err, result) {
           if (err)
             throw err;
@@ -78,7 +77,7 @@ router.post('/uploadcsv', function (req, res) {
     var stream2 = fs.createReadStream(bangdiem1, { encoding: 'utf-8' })
       .pipe(csv.parse({ headers: true }))
       .transform(function (row) {
-        var sql = 'INSERT INTO bangdiem1 (ID, Ten, Mon1, Mon2, Mon3, TongDiem, NV1, NV2 ) VALUES (' +
+        var sql = 'INSERT INTO bangdiem (ID, Ten, Mon1, Mon2, Mon3, TongDiem, NV1, NV2 ) VALUES (' +
           "'" + row.ID + "'" +
           ',' + "'" + row.Ten + "'" +
           ',' + "'" + row.Mon1 + "'" +
@@ -97,7 +96,7 @@ router.post('/uploadcsv', function (req, res) {
     var stream3 = fs.createReadStream(bangdihoc)
       .pipe(csv.parse({ headers: true }))
       .transform(function (row) {
-        var sql = 'INSERT INTO bangdihoc (Diem, TyLe ) VALUES (' + "'" + row.Diem + "'" +
+        var sql = 'INSERT INTO dihoc (diem, ty_Le ) VALUES (' + "'" + row.Diem + "'" +
           ',' + "'" + row.TyLe + "'" + ')';
         connection.query(sql, function (err, result) {
           if (err)
@@ -107,7 +106,9 @@ router.post('/uploadcsv', function (req, res) {
       .on("end", process.exit);
   })
 
-  res.render('index', {msg: "Tải dữ liệu thành công, chọn Tiếp tục để xem kết quả hoặc thay đổi file khác ở bên dưới."});
+  //processing here
+
+  res.render('index2');
 });
 
 router.get('/results', function (req, res) {
