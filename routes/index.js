@@ -61,13 +61,9 @@ router.post('/uploadcsv', function (req, res) {
     var stream = fs.createReadStream(bangnganh)
       .pipe(csv.parse({ headers: true }))
       .transform(function (row) {
-<<<<<<< HEAD
-        var sql = 'INSERT INTO bangnganh (ma_nganh, ten, chi_tieu) VALUES (' + "'" + row.ID + "'" +
-=======
 
         var sql = 'INSERT INTO bangnganh (ID, Ten, Chitieu, DiemSan) VALUES (' +
           "'" + row.ID + "'" +
->>>>>>> 2ee11a57164c75be212473d4d4693790306358da
           ',' + "'" + row.Ten + "'" +
           ',' + "'" + row.ChiTieu + "'" + ')';
         connection.query(sql, function (err, result) {
@@ -81,24 +77,15 @@ router.post('/uploadcsv', function (req, res) {
     var stream2 = fs.createReadStream(bangdiem1, { encoding: 'utf-8' })
       .pipe(csv.parse({ headers: true }))
       .transform(function (row) {
-<<<<<<< HEAD
-        var sql = 'INSERT INTO bangdiem (ID, Ten, Mon1, Mon2, Mon3, TongDiem, NV1 ,NV2) VALUES (' + 
-                "'" + row.ID + "'" +
-=======
         var sql = 'INSERT INTO bangdiem1 (ID, Ten, Mon1, Mon2, Mon3, TongDiem, NV1, NV2 ) VALUES (' +
           "'" + row.ID + "'" +
->>>>>>> 2ee11a57164c75be212473d4d4693790306358da
           ',' + "'" + row.Ten + "'" +
           ',' + "'" + row.Mon1 + "'" +
           ',' + "'" + row.Mon2 + "'" +
           ',' + "'" + row.Mon3 + "'" +
           ',' + "'" + row.TongDiem + "'" +
-<<<<<<< HEAD
-          ',' + "'" + row.NV1 + "'" +','+10 +')';
-=======
           ',' + "'" + row.NV1 + "'" +
           ',' + "'" + row.NV2 + "'" + ')';
->>>>>>> 2ee11a57164c75be212473d4d4693790306358da
         connection.query(sql, function (err, result) {
           if (err)
             throw err;
@@ -117,48 +104,7 @@ router.post('/uploadcsv', function (req, res) {
         });
       })
       .on("end", process.exit);
-<<<<<<< HEAD
-  });
-  res.redirect('/');
-})
-
-//Upload Thi Sinh NV1
-router.post('/nv1', function (req, res) {
-  upload(req, res, function (err) {
-    console.log(req.files);
-    var datafile = req.files[0].path;
-    var csv = require("fast-csv");
-    var fs = require("fs");
-    var stream = fs.createReadStream(datafile, { encoding: "utf-8" })
-      .pipe(csv.parse({ headers: true }))
-
-      .transform(function (row) {
-
-        var sql = 'INSERT INTO nv1 (ID, Name ,Toan , Ly, Hoa, Van, Anh, Sinh, Su, Dia, NV1) VALUES ('
-          + "'" + row.ID + "'" + ','
-          + "'" + row.Name + "'" + ','
-          + "'" + row.Toan + "'" + ','
-          + "'" + row.Ly + "'" + ','
-          + "'" + row.Hoa + "'" + ','
-          + "'" + row.Van + "'" + ','
-          + "'" + row.Anh + "'" + ','
-          + "'" + row.Sinh + "'" + ','
-          + "'" + row.Su + "'" + ','
-          + "'" + row.Dia + "'" + ','
-          + "'" + row.NV1 + "'" + ')';
-        connection.query(sql, function (err, result) {
-          if (err)
-            throw err;
-        });
-      })
-      .on("end", process.exit);
-
-  });
-  res.redirect('/nv1');
-});
-=======
   })
->>>>>>> 2ee11a57164c75be212473d4d4693790306358da
 
   res.render('index', {msg: "Tải dữ liệu thành công, chọn Tiếp tục để xem kết quả hoặc thay đổi file khác ở bên dưới."});
 });
