@@ -148,7 +148,7 @@ function doSynchronousMajor(data, diemchuan, tyLeVuot, done) {
                             }
                             table.push(obj);
                         }
-
+                        console.log(table);
                         // Loc tu chi tieu va ty le vuot 
                         table = table.filter((element) => {
                             return element.trung >= majorInfo.chi_tieu && element.dihoc < majorInfo.chi_tieu * (1 + tyLeVuot);
@@ -191,7 +191,7 @@ function doSynchronousMajor(data, diemchuan, tyLeVuot, done) {
                         connection.query(insertTrue, function (err, result) {
                             daduyet.push(data[i].major);
                             if (err) throw err;
-                            if (++i < data.length) {
+                            if (++i < data.length-1) {
                                 loop(data, i, done);
                             } else {
                                 done(ketqua);
@@ -246,12 +246,18 @@ function doSynchronousMajor(data, diemchuan, tyLeVuot, done) {
                                 ketqua.push(objRe);
                                 let insertTrue = ' insert into pass (ID, Ten, Mon1, Mon2, Mon3, TongDiem, Pass) select bangdiem.ID, bangdiem.Ten, bangdiem.Mon1, bangdiem.Mon2, bangdiem.Mon3, bangdiem.TongDiem, bangdiem.NV1 from bangdiem where TongDiem >= ' + result + ' and Nv1 = ' + infoMajor.ma_nganh;
                                 connection.query(insertTrue, function (err, res) {
-                                    let sql2 = ' insert into pass (ID, Ten, Mon1, Mon2, Mon3, TongDiem, Pass) select bangdiem.ID, bangdiem.Ten, bangdiem.Mon1, bangdiem.Mon2, bangdiem.Mon3, bangdiem.TongDiem, bangdiem.NV1 from bangdiem where TongDiem >= ' + result + ' and (Nv2 = ' + infoMajor.ma_nganh + ' and NV1 not in (' + daduyet + '))';
-                                    console.log(sql2);
+                                    let sql2;
+                                    if (i == data.length - 1) {
+                                         sql2 = ' insert into pass (ID, Ten, Mon1, Mon2, Mon3, TongDiem, Pass) select bangdiem.ID, bangdiem.Ten, bangdiem.Mon1, bangdiem.Mon2, bangdiem.Mon3, bangdiem.TongDiem, bangdiem.NV1 from bangdiem where TongDiem >= ' + result + ' and ( NV2 = ' + infoMajor.ma_nganh + ')';
+
+                                    } else {
+                                         sql2 = ' insert into pass (ID, Ten, Mon1, Mon2, Mon3, TongDiem, Pass) select bangdiem.ID, bangdiem.Ten, bangdiem.Mon1, bangdiem.Mon2, bangdiem.Mon3, bangdiem.TongDiem, bangdiem.NV1 from bangdiem where TongDiem >= ' + result + ' and ( NV2 = ' + infoMajor.ma_nganh + ' and NV1 not in (' + daduyet + '))';
+
+                                    } console.log(sql2);
                                     connection.query(sql2, function (err, res) {
                                         daduyet.push(data[i].major);
                                         if (err) throw err;
-                                        if (++i < data.length) {
+                                        if (++i < data.length-1) {
                                             loop(data, i, done);
                                         } else {
                                             done(ketqua);
@@ -294,7 +300,14 @@ function doSynchronousMajor(data, diemchuan, tyLeVuot, done) {
                                 ketqua.push(objRe);
                                 let insertTrue = ' insert into pass (ID, Ten, Mon1, Mon2, Mon3, TongDiem, Pass) select bangdiem.ID, bangdiem.Ten, bangdiem.Mon1, bangdiem.Mon2, bangdiem.Mon3, bangdiem.TongDiem, bangdiem.NV1 from bangdiem where TongDiem >= ' + result + ' and NV1 = ' + infoMajor.ma_nganh;
                                 connection.query(insertTrue, function (err, res) {
-                                    let sql2 = ' insert into pass (ID, Ten, Mon1, Mon2, Mon3, TongDiem, Pass) select bangdiem.ID, bangdiem.Ten, bangdiem.Mon1, bangdiem.Mon2, bangdiem.Mon3, bangdiem.TongDiem, bangdiem.NV1 from bangdiem where TongDiem >= ' + result + ' and ( NV2 = ' + infoMajor.ma_nganh + ' and NV1 not in (' + daduyet + '))';
+                                    let sql2;
+                                    if (i == data.length - 1) {
+                                        sql2 = ' insert into pass (ID, Ten, Mon1, Mon2, Mon3, TongDiem, Pass) select bangdiem.ID, bangdiem.Ten, bangdiem.Mon1, bangdiem.Mon2, bangdiem.Mon3, bangdiem.TongDiem, bangdiem.NV1 from bangdiem where TongDiem >= ' + result + ' and ( NV2 = ' + infoMajor.ma_nganh + ')';
+
+                                    } else {
+                                        sql2 = ' insert into pass (ID, Ten, Mon1, Mon2, Mon3, TongDiem, Pass) select bangdiem.ID, bangdiem.Ten, bangdiem.Mon1, bangdiem.Mon2, bangdiem.Mon3, bangdiem.TongDiem, bangdiem.NV1 from bangdiem where TongDiem >= ' + result + ' and ( NV2 = ' + infoMajor.ma_nganh + ' and NV1 not in (' + daduyet + '))';
+
+                                    }
                                     // if (daduyet.length > 0) {
                                     //     sql2 = 'select count(id) as cnt from bangdiem where TongDiem = ' + i + ' and ( NV1 = ' + major + ' or (NV2 = ' + major + ' and NV1 not in (' + daduyet + ')))';
                                     // }
@@ -303,7 +316,7 @@ function doSynchronousMajor(data, diemchuan, tyLeVuot, done) {
                                     connection.query(sql2, function (err, res) {
                                         daduyet.push(data[i].major);
                                         if (err) throw err;
-                                        if (++i < data.length) {
+                                        if (++i < data.length-1) {
                                             loop(data, i, done);
                                         } else {
                                             done(ketqua);
@@ -346,7 +359,7 @@ var process = function () {
             //thực hiện tính từng ngành 
             console.log(result);
             doSynchronousMajor(result, diemchuan, tyLeVuot, function (res) {
-
+                console.log(res);
             });
 
         });
