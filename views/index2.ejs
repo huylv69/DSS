@@ -206,6 +206,7 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
+                                        <th>Mã ngành</th>
                                         <th>Ngành</th>
                                         <th>Điểm chuẩn</th>
                                     </tr>
@@ -213,7 +214,8 @@
                                 <tbody>
                                     <% for (var i = 0; i < result.length; i++) { %>
                                         <tr>
-                                                <td><%=result[i].ten %></td>
+                                                <td><%=result[i].ma_nganh %></td>
+                                                <td><%=result[i].nganh %></td>
                                                 <td><%=result[i].diemchuan %></td>
                                         </tr>
                                     <% }%>
