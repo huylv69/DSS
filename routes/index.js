@@ -439,8 +439,6 @@ router.post('/uploadcsv', function (req, res) {
   { ID: "2", Ten: "Linh", Mon1: "8", Mon2: "7", Mon3: "6", TongDiem: "21", Pass: "1" },
   { ID: "2", Ten: "Linh", Mon1: "8", Mon2: "7", Mon3: "6", TongDiem: "21", Pass: "1" }];
 
-
-
   res.render('index2', { pass: pass, result: result });
 });
 
@@ -470,6 +468,12 @@ router.get('/results', function (req, res) {
       //thực hiện tính từng ngành 
       console.log(result);
       doSynchronousMajor(result, diemchuan, tyLeVuot, function (res) {
+        let sql = 'select * from pass';
+        connection.query(sql,function(err,pass){
+          //var result = [{ ten: "CNTT", diemchuan: "5" }, { ten: "TDH", diemchuan: "12" }];
+          
+          res.render('index2', { pass: pass, result: res });
+        })
 
       });
 
@@ -478,12 +482,12 @@ router.get('/results', function (req, res) {
   });
 
   //Demo biến kết quả
-  var result = [{ ten: "CNTT", diemchuan: "5" }, { ten: "TDH", diemchuan: "12" }];
-  var pass = [{ ID: "2", Ten: "Linh", Mon1: "8", Mon2: "7", Mon3: "6", TongDiem: "21", Pass: "1" },
-  { ID: "2", Ten: "Linh", Mon1: "8", Mon2: "7", Mon3: "6", TongDiem: "21", Pass: "1" },
-  { ID: "2", Ten: "Linh", Mon1: "8", Mon2: "7", Mon3: "6", TongDiem: "21", Pass: "1" },
-  { ID: "2", Ten: "Linh", Mon1: "8", Mon2: "7", Mon3: "6", TongDiem: "21", Pass: "1" }];
+  // var result = [{ ten: "CNTT", diemchuan: "5" }, { ten: "TDH", diemchuan: "12" }];
+  // var pass = [{ ID: "2", Ten: "Linh", Mon1: "8", Mon2: "7", Mon3: "6", TongDiem: "21", Pass: "1" },
+  // { ID: "2", Ten: "Linh", Mon1: "8", Mon2: "7", Mon3: "6", TongDiem: "21", Pass: "1" },
+  // { ID: "2", Ten: "Linh", Mon1: "8", Mon2: "7", Mon3: "6", TongDiem: "21", Pass: "1" },
+  // { ID: "2", Ten: "Linh", Mon1: "8", Mon2: "7", Mon3: "6", TongDiem: "21", Pass: "1" }];
 
-  res.render('index2', { pass: pass, result: result });
+  // res.render('index2', { pass: pass, result: result });
 })
 module.exports = router;
