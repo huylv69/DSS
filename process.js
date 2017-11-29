@@ -60,6 +60,7 @@ function doCountForMajor(major, diemchuan, done) {
     var loop = function (i, done) {
         let sql = 'select count(id) as cnt from bangdiem where NV1 = ' + major + ' and TongDiem = ' + i;
         connection.query(sql, function (err, result) {
+            console.log(sql);
             var obj = {};
             obj.diem = i;
             obj.count = result[0].cnt;
@@ -85,6 +86,7 @@ function doSynchronousNV1(data, diemchuan, done) {
             element = data[i];
             let cntChiTieu = ' select count(id) as cnt from bangdiem where TongDiem >= ' + diemchuan + ' and Nv1 = ' + element.ma_nganh;
             connection.query(cntChiTieu, function (err, result) {
+                console.log(cntChiTieu);
                 if (err) throw err;
                 let obj = { major: element.ma_nganh, denta: result[0].cnt - element.chi_tieu }
                 if (obj.denta <= 0) obj.nv1 = result[0].cnt;
@@ -127,6 +129,7 @@ function doSynchronousMajor(data, diemchuan, tyLeVuot, done) {
                             const element = listCnt[index];
                             listCount['c' + element.diem] = element.count;
                         }
+                        console.log(listCount);
                         // console.log(listCount['c'+25]);
                         for (let index = diemchuan; index <= 30; index = (index + 0.25)) {
                             var obj = {};
