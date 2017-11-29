@@ -442,9 +442,9 @@ router.post('/uploadcsv', function (req, res) {
   res.render('index2', { pass: pass, result: result });
 });
 
-router.get('/results', function (req, res) {
+router.post('/results', function (req, res) {
   //processing here
-
+  console.log('1');
   let diemchuan = 15;
   let tyLeVuot = 0.15;
   let sql = 'select * from bangnganh';
@@ -471,6 +471,7 @@ router.get('/results', function (req, res) {
         let sql = 'select * from pass';
         connection.query(sql,function(err,pass){
           //var result = [{ ten: "CNTT", diemchuan: "5" }, { ten: "TDH", diemchuan: "12" }];
+          console.log('2');
           
           res.render('index2', { pass: pass, result: res });
         })
