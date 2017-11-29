@@ -148,7 +148,52 @@ router.post('/process', function(req, res){
                 res.render('index2', {pass: pass, result: result});
 });
 
-router.get('/results', function (req, res) {
+router.post('/results', function (req, res) {
+  //processing here
+  console.log('1');
+  let diemchuan = 15;
+  let tyLeVuot = 0.15;
+  let sql = 'select * from bangnganh';
+  connection.query(sql, function (err, result) {
+    if (err)
+      throw err;
+    doSynchronousNV1(result, diemchuan, function (result) {
+      result.sort(function (a, b) {
+        return b.denta - a.denta;
+      });
+
+      // save candidate pass 
+      // result.forEach(element => {
+      //     if (element.denta < 0) {
+      //         let insertTrue = ' insert into pass (ID, Ten, Mon1, Mon2, Mon3, TongDiem, Pass) select bangdiem.ID, bangdiem.Ten, bangdiem.Mon1, bangdiem.Mon2, bangdiem.Mon3, bangdiem.TongDiem, bangdiem.NV1 from bangdiem where TongDiem >= ' + diemchuan + ' and Nv1 = ' + element.major;
+      //         connection.query(insertTrue, function (err, result) {
+      //         });
+      //     }
+      // }, this);
+
+      //thực hiện tính từng ngành 
+      console.log(result);
+      doSynchronousMajor(result, diemchuan, tyLeVuot, function (res) {
+        let sql = 'select * from pass';
+        connection.query(sql,function(err,pass){
+          //var result = [{ ten: "CNTT", diemchuan: "5" }, { ten: "TDH", diemchuan: "12" }];
+          console.log('2');
+          
+          res.render('index2', { pass: pass, result: res });
+        })
+
+      });
+
+    });
+
+  });
+
+  //Demo biến kết quả
+  // var result = [{ ten: "CNTT", diemchuan: "5" }, { ten: "TDH", diemchuan: "12" }];
+  // var pass = [{ ID: "2", Ten: "Linh", Mon1: "8", Mon2: "7", Mon3: "6", TongDiem: "21", Pass: "1" },
+  // { ID: "2", Ten: "Linh", Mon1: "8", Mon2: "7", Mon3: "6", TongDiem: "21", Pass: "1" },
+  // { ID: "2", Ten: "Linh", Mon1: "8", Mon2: "7", Mon3: "6", TongDiem: "21", Pass: "1" },
+  // { ID: "2", Ten: "Linh", Mon1: "8", Mon2: "7", Mon3: "6", TongDiem: "21", Pass: "1" }];
 
 })
 module.exports = router;
