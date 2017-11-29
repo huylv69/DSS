@@ -206,7 +206,7 @@
                                     <h2>Nhập dữ liệu: </h2>
                                     <hr>
                                     <form enctype="multipart/form-data" method="post" action="/uploadcsv">
-                                        <h4>Nhập bảng ngành (Mã ngành, tên ngành, chỉ tiêu, điểm sàn của bộ giáo dục) </h4>
+                                        <h4>Nhập bảng ngành (Mã ngành, tên ngành, chỉ tiêu) </h4>
                                         <input type="file" name="bangnganh" <br>
                                         <hr>
                                         <h4>Nhập bảng điểm học sinh</h4>
@@ -215,8 +215,11 @@
                                         <h4>Nhập bảng tỷ lệ đi học thực hàng năm theo thang điểm</h4>
                                         <input type="file" name="bangdihoc" <br>
                                         <hr>
+                                        <h4>Nhập điểm ngưỡng</h4>
+                                        <input type="number" name="diem_nguong"> <br>
+                                        <hr>
                                         
-                                        <input id="submitButton" class="btn btn-success" type="submit" value="Submit">
+                                        <input name="submit"  class="btn btn-success" type="submit" value="Submit">
 
                                     </form>
 

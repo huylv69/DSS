@@ -364,8 +364,24 @@ router.get('/', function (req, res) {
 
 router.post('/uploadcsv', function (req, res) {
 
+  
   uploadTest(req, res, function (err) {
 
+    var diem_nguong = req.body.diem_nguong;
+    console.log(req.body);
+  
+    var del_diem_nguong = "DELETE FROM `system` WHERE `system`.`tieu_chi` = 'diem_nguong'";
+    connection.query(del_diem_nguong, function (err, result) {
+      if (err)
+        throw err;
+    });
+  
+    var them_diem_nguong = "INSERT INTO `system` (`tieu_chi`, `gia_tri`) VALUES ('diem_nguong'," + "'" + diem_nguong + "'" + ");";
+    connection.query(them_diem_nguong, function (err, result) {
+      if (err)
+        throw err;
+    });
+    
     var bangnganh = req.files.bangnganh[0].path;
     var bangdihoc = req.files.bangdihoc[0].path;
     var bangdiem1 = req.files.bangdiem1[0].path;
