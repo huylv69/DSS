@@ -120,6 +120,16 @@ router.post('/process', function(req, res){
   var pass = [{ID: "2", Ten:"Linh", Mon1: "8", Mon2: "7", Mon3: "6", TongDiem: "21", Pass: "1"},
                 {ID: "2", Ten:"Linh", Mon1: "8", Mon2: "7", Mon3: "6", TongDiem: "21", Pass: "1"},
                 {ID: "2", Ten:"Linh", Mon1: "8", Mon2: "7", Mon3: "6", TongDiem: "21", Pass: "1"},
+                {ID: "2", Ten:"Linh", Mon1: "8", Mon2: "7", Mon3: "6", TongDiem: "21", Pass: "1"},
+                {ID: "2", Ten:"Linh", Mon1: "8", Mon2: "7", Mon3: "6", TongDiem: "21", Pass: "1"},
+                {ID: "2", Ten:"Linh", Mon1: "8", Mon2: "7", Mon3: "6", TongDiem: "21", Pass: "1"},
+                {ID: "2", Ten:"Linh", Mon1: "8", Mon2: "7", Mon3: "6", TongDiem: "21", Pass: "1"},
+                {ID: "2", Ten:"Linh", Mon1: "8", Mon2: "7", Mon3: "6", TongDiem: "21", Pass: "1"},
+                {ID: "2", Ten:"Linh", Mon1: "8", Mon2: "7", Mon3: "6", TongDiem: "21", Pass: "1"},
+                {ID: "2", Ten:"Linh", Mon1: "8", Mon2: "7", Mon3: "6", TongDiem: "21", Pass: "1"},
+                {ID: "2", Ten:"Linh", Mon1: "8", Mon2: "7", Mon3: "6", TongDiem: "21", Pass: "1"},
+                {ID: "2", Ten:"Linh", Mon1: "8", Mon2: "7", Mon3: "6", TongDiem: "21", Pass: "1"},
+                {ID: "2", Ten:"Linh", Mon1: "8", Mon2: "7", Mon3: "6", TongDiem: "21", Pass: "1"},
                 {ID: "2", Ten:"Linh", Mon1: "8", Mon2: "7", Mon3: "6", TongDiem: "21", Pass: "1"}];
 
                 res.render('index2', {pass: pass, result: result});
